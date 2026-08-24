@@ -1,0 +1,831 @@
+/* =========================================================
+   PARKSAFE SETTINGS
+   Matches 440px App Shell + 410px Content Card
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.settings-page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 28px 20px 45px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(37, 99, 235, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #edf5ff 0%,
+      #e5f0ff 48%,
+      #f7fbff 100%
+    );
+
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+
+  color: #12345b;
+}
+
+/* =========================================================
+   MAIN 440px APP SHELL
+========================================================= */
+
+.settings-app-shell {
+  width: 440px;
+  max-width: 440px;
+
+  min-height: 720px;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  border: 1px solid #e0eaf5;
+
+  box-shadow:
+    0 20px 55px rgba(25, 66, 112, 0.14);
+
+  position: relative;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.settings-top-bar {
+  width: 100%;
+  height: 76px;
+
+  padding: 15px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #edf2f8;
+}
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.settings-top-button {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 13px;
+
+  background: #eef6ff;
+  color: #0878ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.settings-top-button:hover {
+  background: #dcecff;
+
+  transform: translateX(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(13, 110, 253, 0.12);
+}
+
+/* =========================================================
+   TOP TITLE
+========================================================= */
+
+.settings-top-title {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 42px;
+
+  line-height: 1.2;
+}
+
+.settings-top-title strong {
+  font-size: 18px;
+
+  color: #0878ff;
+
+  font-weight: 750;
+
+  letter-spacing: 0.1px;
+}
+
+/* =========================================================
+   RIGHT SPACER
+========================================================= */
+
+.settings-top-spacer {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.settings-content {
+  width: 100%;
+
+  padding: 24px 15px 30px;
+}
+
+/* =========================================================
+   SUCCESS / ERROR
+========================================================= */
+
+.settings-message {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 12px 13px;
+
+  margin-bottom: 15px;
+
+  border-radius: 13px;
+
+  font-size: 11px;
+}
+
+.settings-message .message-icon {
+  width: 27px;
+  height: 27px;
+
+  min-width: 27px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.settings-message strong {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 11px;
+}
+
+.settings-message p {
+  margin: 0;
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+/* SUCCESS */
+
+.success-message {
+  background: #effaf4;
+
+  border: 1px solid #c8ead6;
+
+  color: #176b3b;
+}
+
+.success-message .message-icon {
+  background: #d7f3e3;
+
+  color: #178047;
+}
+
+/* ERROR */
+
+.error-message {
+  background: #fff4f4;
+
+  border: 1px solid #f1cccc;
+
+  color: #b42318;
+}
+
+.error-message .message-icon {
+  background: #ffe0e0;
+
+  color: #c62828;
+}
+
+/* =========================================================
+   MAIN SETTINGS CARD
+   410px - same visual width as other pages
+========================================================= */
+
+.settings-main-card {
+  width: 410px;
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border: 1px solid #deebf8;
+
+  border-radius: 20px;
+
+  padding: 16px 13px 12px;
+
+  box-shadow:
+    0 8px 24px rgba(23, 54, 93, 0.06);
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.settings-section {
+  margin-bottom: 17px;
+}
+
+.settings-section-last {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.settings-section-title {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 2px 4px 11px;
+
+  padding-left: 1px;
+
+  font-size: 10px;
+
+  font-weight: 750;
+
+  color: #557493;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.section-line {
+  width: 3px;
+  height: 14px;
+
+  border-radius: 10px;
+
+  background: #0878ff;
+
+  flex-shrink: 0;
+}
+
+/* DATA SECTION */
+
+.data-section-title {
+  margin-top: 17px;
+}
+
+/* DANGER SECTION */
+
+.danger-section-title {
+  margin-top: 17px;
+}
+
+.danger-section-title .section-line {
+  background: #dc3545;
+}
+
+/* =========================================================
+   SETTINGS OPTION
+========================================================= */
+
+.settings-option {
+  width: 100%;
+
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 11px 10px;
+
+  margin-bottom: 9px;
+
+  border: 1px solid #e1ebf6;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+.settings-option:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.58;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.settings-option:not(:disabled):hover {
+  transform: translateY(-2px);
+
+  border-color: #b9d8fa;
+
+  background: #fbfdff;
+
+  box-shadow:
+    0 8px 20px rgba(13, 110, 253, 0.08);
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.settings-option-left {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  flex: 1;
+}
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.settings-icon {
+  width: 44px;
+  height: 44px;
+
+  min-width: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  font-size: 19px;
+}
+
+/* PROFILE */
+
+.profile-icon {
+  background: #eaf3ff;
+
+  color: #0878ff;
+}
+
+/* HISTORY */
+
+.history-icon {
+  background: #eef6ff;
+
+  color: #0878ff;
+}
+
+/* DOWNLOAD */
+
+.download-icon {
+  background: #e8f4ff;
+
+  color: #0878ff;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+/* DELETE */
+
+.delete-icon {
+  background: #fff0f0;
+
+  color: #d92d20;
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.settings-text {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  flex: 1;
+}
+
+.settings-text h3 {
+  margin: 0 0 4px;
+
+  font-size: 13.5px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  color: #173d66;
+}
+
+.settings-text p {
+  margin: 0;
+
+  font-size: 10.5px;
+
+  line-height: 1.45;
+
+  color: #7a8ca2;
+}
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.settings-arrow {
+  width: 30px;
+  height: 30px;
+
+  min-width: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #eef6ff;
+
+  color: #0878ff;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  transition: 0.25s ease;
+}
+
+.settings-option:not(:disabled):hover .settings-arrow {
+  background: #0878ff;
+
+  color: #ffffff;
+
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   DELETE ACCOUNT
+========================================================= */
+
+.delete-option {
+  margin-bottom: 3px;
+}
+
+.delete-option:not(:disabled):hover {
+  border-color: #f0bebe;
+
+  background: #fffafa;
+
+  box-shadow:
+    0 8px 20px rgba(220, 53, 69, 0.08);
+}
+
+.delete-option .settings-text h3 {
+  color: #c62828;
+}
+
+.delete-option .settings-arrow {
+  background: #fff1f1;
+
+  color: #d92d20;
+}
+
+.delete-option:not(:disabled):hover .settings-arrow {
+  background: #dc3545;
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.settings-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: #456987;
+}
+
+.loading-spinner {
+  width: 15px;
+  height: 15px;
+
+  border: 2px solid #d8e6f6;
+
+  border-top-color: #0878ff;
+
+  border-radius: 50%;
+
+  animation: settingsSpin 0.8s linear infinite;
+}
+
+@keyframes settingsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   TABLET / DESKTOP
+========================================================= */
+
+@media (min-width: 701px) {
+  .settings-page {
+    padding: 28px 20px 45px;
+  }
+
+  .settings-app-shell {
+    width: 440px;
+    max-width: 440px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .settings-page {
+    padding: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    background:
+      linear-gradient(
+        135deg,
+        #edf5ff 0%,
+        #e5f0ff 48%,
+        #f7fbff 100%
+      );
+  }
+
+  .settings-app-shell {
+    width: 100%;
+    max-width: 440px;
+
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    border: none;
+
+    box-shadow: none;
+  }
+
+  .settings-content {
+    padding: 20px 15px 30px;
+  }
+
+  .settings-main-card {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .settings-top-bar {
+    height: 70px;
+
+    padding: 13px 16px;
+  }
+
+  .settings-top-button {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 12px;
+
+    font-size: 22px;
+  }
+
+  .settings-top-spacer {
+    width: 40px;
+    height: 40px;
+  }
+
+  .settings-top-title {
+    margin-left: 40px;
+  }
+
+  .settings-top-title strong {
+    font-size: 17px;
+  }
+
+  .settings-content {
+    padding: 18px 15px 28px;
+  }
+
+  .settings-main-card {
+    padding: 14px 10px 10px;
+
+    border-radius: 18px;
+  }
+
+  .settings-section-title {
+    font-size: 9.5px;
+
+    margin-left: 3px;
+    margin-right: 3px;
+
+    margin-bottom: 9px;
+  }
+
+  .settings-option {
+    min-height: 69px;
+
+    padding: 10px 8px;
+
+    gap: 8px;
+
+    border-radius: 14px;
+
+    margin-bottom: 8px;
+  }
+
+  .settings-option-left {
+    gap: 10px;
+  }
+
+  .settings-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+  }
+
+  .download-icon {
+    font-size: 23px;
+  }
+
+  .settings-text h3 {
+    font-size: 12.5px;
+  }
+
+  .settings-text p {
+    font-size: 9.8px;
+  }
+
+  .settings-arrow {
+    width: 28px;
+    height: 28px;
+
+    min-width: 28px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+  }
+
+  .data-section-title {
+    margin-top: 15px;
+  }
+
+  .danger-section-title {
+    margin-top: 15px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 360px) {
+  .settings-content {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .settings-main-card {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .settings-option {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .settings-option-left {
+    gap: 8px;
+  }
+
+  .settings-icon {
+    width: 39px;
+    height: 39px;
+
+    min-width: 39px;
+  }
+
+  .settings-text h3 {
+    font-size: 11.5px;
+  }
+
+  .settings-text p {
+    font-size: 9px;
+  }
+}

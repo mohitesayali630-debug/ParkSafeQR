@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(135deg,#dbeafe,#f8fbff);
+}
+
+/* ==========================
+        OTP PAGE
+========================== */
+
+.otp-page{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    background:linear-gradient(135deg,#dbeafe,#f8fbff);
+
+}
+
+/* ==========================
+        CARD
+========================== */
+
+.otp-card{
+
+    width:390px;
+
+    min-height:610px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:32px 28px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+}
+
+/* ==========================
+        HEADER
+========================== */
+
+.otp-logo{
+
+    width:110px;
+
+    display:block;
+
+    margin:0 auto 15px;
+
+}
+
+.otp-title{
+
+    text-align:center;
+
+    color:#2563EB;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.otp-text{
+
+    text-align:center;
+
+    color:#6B7280;
+
+    font-size:15px;
+
+    line-height:24px;
+
+    margin-bottom:38px;
+
+}
+
+/* ==========================
+        OTP BOXES
+========================== */
+
+.otp-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+}
+
+.otp-input{
+
+    width:50px;
+
+    height:56px;
+
+    border:2px solid #d8d8d8;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    outline:none;
+
+}
+
+.otp-input:focus{
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 8px rgba(37,99,235,.20);
+
+}
+
+/* ==========================
+        TIMER
+========================== */
+
+.timer-container{
+
+    text-align:center;
+
+    margin-bottom:28px;
+
+}
+
+.timer-text{
+
+    color:#2563EB;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.resend-btn{
+
+    border:none;
+
+    background:none;
+
+    color:#2563EB;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.resend-btn:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+        VERIFY BUTTON
+========================== */
+
+.verify-btn{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563EB;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.verify-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ==========================
+        BACK LINK
+========================== */
+
+.otp-button-group .back-btn{
+
+    position:static !important;
+
+    width:100% !important;
+    height:50px;
+
+    margin:0;
+
+    background:#ffffff;
+
+    border:2px solid #2563EB;
+
+    border-radius:14px;
+
+    color:#2563EB;
+
+    font-size:17px;
+    font-weight:600;
+    letter-spacing:.3px;
+
+    cursor:pointer;
+
+    transition:all .3s ease;
+
+    display:block;
+}
+
+.otp-button-group .back-btn:hover{
+
+    background:#EEF4FF;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 18px rgba(37,99,235,.18);
+}
+/* ==========================
+        MOBILE
+========================== */
+
+@media(max-width:480px){
+
+    .otp-card{
+
+        width:100%;
+
+        min-height:auto;
+
+        padding:28px 20px;
+
+    }
+
+    .otp-container{
+
+        gap:8px;
+
+    }
+
+    .otp-input{
+
+        width:45px;
+
+        height:50px;
+
+        font-size:20px;
+
+    }
+
+}  
+.otp-button-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:10px;
+
+} 
+.back-link {
+    display: block;
+    width: auto;
+
+    margin: 32px auto 0;   /* जरा खाली */
+    
+    border: none;
+    background: transparent;
+
+    color: #6b9fe8;        /* faint blue */
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    padding: 4px 8px;
+
+    transition: 0.2s;
+}
+
+.back-link:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+} 

@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background:linear-gradient(135deg,#dbeafe,#f8fbff);
+}
+
+/* ===========================
+   Register Page
+=========================== */
+
+.register-page{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:15px;
+
+    background:linear-gradient(135deg,#dbeafe,#f8fbff);
+
+}
+
+/* ===========================
+   Register Card
+=========================== */
+
+.register-card{
+
+    width:410px;
+
+    max-height:95vh;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.15);
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.register-header{
+
+    text-align:center;
+
+    padding:18px 20px 12px;
+
+    flex-shrink:0;
+
+}
+
+.logo{
+
+    width:130px;
+
+    margin-bottom:10px;
+
+}
+
+.register-title{
+
+    color:#0d6efd;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.register-text{
+
+    color:#6c757d;
+
+    font-size:15px;
+
+}
+
+/* ===========================
+   Register Body
+=========================== */
+
+.register-body{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:20px;
+
+}
+
+.register-body::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.register-body::-webkit-scrollbar-thumb{
+
+    background:#d1d5db;
+
+    border-radius:20px;
+
+}
+/* ===========================
+   Input Box
+=========================== */
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:16px;
+
+}
+
+.input-icon{
+
+    position:absolute;
+
+    left:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#6c757d;
+
+    font-size:15px;
+
+    pointer-events:none;
+
+}
+
+.eye-icon{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#6c757d;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.eye-icon:hover{
+
+    color:#0d6efd;
+
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.form-control{
+
+    width:100%;
+
+    height:48px;
+
+    border:1px solid #d6d6d6;
+
+    border-radius:14px;
+
+    padding-left:45px;
+
+    padding-right:45px;
+
+    font-size:15px;
+
+    background:#fff;
+
+    transition:.3s;
+
+}
+
+.form-control:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 8px rgba(13,110,253,.18);
+
+    outline:none;
+
+}
+
+/* ===========================
+   Select Dropdown
+=========================== */
+
+select.form-control{
+
+    appearance:none;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+   Privacy Section
+=========================== */
+
+.privacy-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:18px;
+
+}
+
+.privacy-container label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    color:#495057;
+
+}
+
+.privacy-container input[type="radio"]{
+
+    accent-color:#0d6efd;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+   Margin Helpers
+=========================== */
+
+.mb-name{
+    margin-bottom:10px;
+}
+
+.mb-name .error-text{
+
+    margin-top:4px;
+    margin-left:5px;
+
+}
+
+.mb-contact{
+    margin-bottom:10px;
+}
+.mb-3{
+
+    margin-bottom:16px;
+
+}
+
+.mb-4{
+
+    margin-bottom:20px;
+
+}
+
+/* ===========================
+   Next Button
+=========================== */
+
+.next-btn{
+
+    width:100%;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#0d6efd;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.next-btn:hover{
+
+    background:#0b5ed7;
+
+} 
+/* ===========================
+   Section Title
+=========================== */
+
+.section-title{
+
+    color:#0d6efd;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    margin-bottom:16px;
+
+}
+
+/* ===========================
+   Contact Card
+=========================== */
+
+.contact-card{
+    width:100%;
+    min-height:160px;
+
+    background:#f8fbff;
+
+    border:1px solid #dbeafe;
+
+    border-radius:16px;
+
+    padding:15px;
+
+    margin-bottom:16px;
+
+    transition:.3s;
+
+}
+
+.contact-card:hover{
+
+    border-color:#0d6efd;
+
+    box-shadow:0 4px 12px rgba(13,110,253,.10);
+
+}
+
+/* ===========================
+   Contact Title
+=========================== */
+
+.contact-title{
+
+    color:#0d6efd;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+
+/* ===========================
+   Add Contact Button
+=========================== */
+
+.add-contact-btn{
+
+    width:100%;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#eef5ff;
+
+    color:#0d6efd;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    margin-bottom:20px;
+
+}
+
+.add-contact-btn:hover{
+
+    background:#dbeafe;
+
+}
+
+/* ===========================
+   Vehicle & Dropdown
+=========================== */
+
+select.form-control{
+
+    width:100%;
+
+    height:48px;
+
+    border-radius:14px;
+
+    border:1px solid #d6d6d6;
+
+    padding-left:45px;
+
+    padding-right:20px;
+
+    background:#fff;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+select.form-control:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 8px rgba(13,110,253,.18);
+
+}
+
+/* ===========================
+   Contact Inputs
+=========================== */
+
+.contact-card .input-box:last-child{
+
+    margin-bottom:0;
+
+}
+/* ===========================
+   Bottom Buttons
+=========================== */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-top:22px;
+
+}
+
+.back-btn{
+
+    flex:1;
+
+    height:48px;
+
+    border:2px solid #0d6efd !important;
+
+    background:#fff !important;
+
+    color:#0d6efd !important;
+
+    border-radius:14px !important;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#eef5ff !important;
+
+    color:#0d6efd !important;
+
+}
+
+.generate-btn{
+
+    flex:1.3;
+
+    height:48px;
+
+    border:none !important;
+
+    border-radius:14px !important;
+
+    background:#0d6efd !important;
+
+    color:#fff !important;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.generate-btn:hover{
+
+    background:#0b5ed7 !important;
+
+}
+
+/* ===========================
+   Hide Browser Password Eye
+=========================== */
+
+input::-ms-reveal,
+input::-ms-clear{
+
+    display:none;
+
+}
+
+input::-webkit-credentials-auto-fill-button{
+
+    display:none !important;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:480px){
+
+    .register-card{
+
+        width:100%;
+
+        max-width:410px;
+
+        max-height:95vh;
+
+    }
+
+    .logo{
+
+        width:105px;
+
+    }
+
+    .register-title{
+
+        font-size:25px;
+
+    }
+
+    .register-text{
+
+        font-size:14px;
+
+    }
+
+    .button-group{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .back-btn,
+    .generate-btn{
+
+        width:100%;
+
+    }
+
+}
+
+/* ==========================
+        Error Message
+========================== */
+
+.error-text{
+    display:block;
+    color:#ff3b3b;
+    font-size:13px;
+    margin-top:4px;
+    margin-left:5px;
+}
+.mb-email{
+
+    margin-bottom:16px;
+
+}
+
+.mb-email .error-text{
+
+    margin-top:4px;
+    margin-left:5px;
+
+}
+
+.mb-password{
+
+    margin-bottom:10px;
+
+} 
+.mb-confirm-password{
+
+    margin-bottom:10px;
+
+} 
+.mb-vehicle{
+
+    margin-bottom:16px;
+
+} 
+.mb-blood{
+
+    margin-bottom:16px;
+
+}  
+.mb-medical{
+
+    margin-bottom:16px;
+
+}
+.mb-contact-name{
+
+    margin-bottom:16px;
+
+} 
+.mb-contact-number{
+
+    margin-bottom:16px;
+
+}  
+.phone-input-box{
+    display:flex;
+    align-items:center;
+}
+
+.country-code{
+
+    position:absolute;
+
+    left:42px;
+
+    font-weight:600;
+
+    color:#495057;
+
+    font-size:15px;
+
+}
+
+.phone-input{
+
+    padding-left:82px !important;
+
+} 

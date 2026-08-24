@@ -1,0 +1,453 @@
+/* ================================
+   VEHICLE PAGE
+================================ */
+
+.vehicle-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #eef6ff;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 24px 0 40px;
+  box-sizing: border-box;
+
+  font-family: Arial, sans-serif;
+}
+
+
+/* ================================
+   MAIN 410px CARD
+================================ */
+
+.vehicle-container {
+  width: 410px;
+  max-width: calc(100% - 30px);
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  padding: 18px 20px 30px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 12px 35px rgba(30, 90, 150, 0.10);
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.vehicle-header {
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #edf2f7;
+
+  margin-bottom: 20px;
+}
+
+.vehicle-header h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  color: #1677ff;
+  text-align: center;
+
+  flex: 1;
+}
+
+.vehicle-header-space {
+  width: 46px;
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.vehicle-back-btn {
+  width: 46px;
+  height: 46px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #eef6ff;
+
+  color: #1677ff;
+
+  font-size: 25px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-back-btn:hover {
+  background: #e3f0ff;
+}
+
+
+/* ================================
+   MAIN VEHICLE CARD
+================================ */
+
+.vehicle-main-card {
+  width: 100%;
+
+  background: #f5faff;
+
+  border: 1px solid #dcecff;
+
+  border-radius: 20px;
+
+  padding: 28px 15px 25px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+
+/* VEHICLE ICON */
+
+.vehicle-icon-circle {
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 12px;
+
+  border-radius: 50%;
+
+  background: #e6f2ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 34px;
+}
+
+
+/* VEHICLE NUMBER */
+
+.vehicle-main-card h2 {
+  margin: 0;
+
+  color: #1677ff;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.vehicle-main-card p {
+  margin: 7px 0 0;
+
+  color: #71809a;
+
+  font-size: 14px;
+}
+
+
+/* ================================
+   SECTIONS
+================================ */
+
+.vehicle-section {
+  margin-bottom: 26px;
+}
+
+.vehicle-section h3 {
+  margin: 0 0 12px;
+
+  color: #1677ff;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* ================================
+   VEHICLE INFORMATION CARD
+================================ */
+
+.vehicle-info-card {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #dcecff;
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 7px 20px rgba(30, 90, 150, 0.06);
+}
+
+.vehicle-info-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.vehicle-info-item span {
+  color: #71809a;
+
+  font-size: 14px;
+}
+
+.vehicle-info-item strong {
+  color: #17365f;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.vehicle-divider {
+  height: 1px;
+
+  background: #e8eef5;
+
+  margin: 17px 0;
+}
+
+
+/* ================================
+   VEHICLE SETTINGS BUTTON
+================================ */
+
+.vehicle-setting-btn {
+  width: 100%;
+
+  min-height: 70px;
+
+  border: 1px solid #dcecff;
+
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 6px 18px rgba(30, 90, 150, 0.05);
+
+  text-align: left;
+}
+
+.vehicle-setting-btn:hover {
+  background: #f8fbff;
+}
+
+
+/* LEFT SIDE */
+
+.vehicle-setting-left {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* ICON */
+
+.vehicle-setting-icon {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 13px;
+
+  background: #eaf4ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+}
+
+
+/* TEXT */
+
+.vehicle-setting-left span {
+  display: block;
+
+  color: #17365f;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  margin-bottom: 4px;
+}
+
+.vehicle-setting-left small {
+  display: block;
+
+  color: #8291a8;
+
+  font-size: 12px;
+}
+
+
+/* ARROW */
+
+.vehicle-arrow {
+  color: #1677ff;
+
+  font-size: 25px;
+
+  margin-left: 8px;
+}
+
+
+/* ================================
+   CHANGE VEHICLE FORM
+================================ */
+
+.vehicle-change-form {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #dcecff;
+
+  border-radius: 17px;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+}
+
+.vehicle-change-form label {
+  display: block;
+
+  color: #17365f;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 8px;
+}
+
+.vehicle-change-form input {
+  width: 100%;
+
+  height: 44px;
+
+  border: 1px solid #cfe0f5;
+
+  border-radius: 11px;
+
+  padding: 0 12px;
+
+  box-sizing: border-box;
+
+  font-size: 15px;
+
+  color: #17365f;
+
+  outline: none;
+}
+
+.vehicle-change-form input:focus {
+  border-color: #1677ff;
+}
+
+
+/* ================================
+   FORM BUTTONS
+================================ */
+
+.vehicle-form-buttons {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 9px;
+
+  margin-top: 12px;
+}
+
+.vehicle-form-buttons button {
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 9px 16px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.vehicle-form-buttons button:first-child {
+  background: #eef2f6;
+
+  color: #536276;
+}
+
+.vehicle-form-buttons button:last-child {
+  background: #1677ff;
+
+  color: #ffffff;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+  .vehicle-page {
+    padding: 0;
+  }
+
+  .vehicle-container {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    padding: 15px 18px 30px;
+  }
+
+  .vehicle-header h1 {
+    font-size: 23px;
+  }
+
+  .vehicle-main-card h2 {
+    font-size: 25px;
+  }
+
+}

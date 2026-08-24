@@ -1,0 +1,404 @@
+/* =========================
+   SCAN PAGE
+========================= */
+
+.scan-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #eef6ff;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 24px 0 40px;
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   MAIN MOBILE CONTAINER
+========================= */
+
+.scan-container {
+  width: 100%;
+  max-width: 440px;
+
+  min-height: calc(100vh - 64px);
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 35px rgba(0, 90, 180, 0.08);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.scan-header {
+  width: 100%;
+
+  min-height: 92px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 18px 22px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #e8eef5;
+
+  position: relative;
+}
+
+
+.scan-back-btn {
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #eef6ff;
+
+  color: #1677ff;
+
+  font-size: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+
+.scan-header h1 {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  margin: 0;
+
+  white-space: nowrap;
+
+  color: #1677ff;
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+
+.scan-header-space {
+  width: 48px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.scan-content {
+  width: 100%;
+
+  padding: 30px 26px 35px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.scan-title {
+  text-align: center;
+
+  margin-bottom: 26px;
+}
+
+
+.scan-title h2 {
+  margin: 0 0 8px;
+
+  color: #123b68;
+
+  font-size: 23px;
+  font-weight: 800;
+}
+
+
+.scan-title p {
+  margin: 0;
+
+  color: #7185a0;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   CAMERA
+========================= */
+
+.scanner-box {
+  width: 100%;
+
+  background: #101820;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  box-sizing: border-box;
+}
+
+
+/*
+  html5-qrcode स्वतः video तयार करतो.
+*/
+
+#qr-reader {
+  width: 100% !important;
+
+  border: none !important;
+
+  background: #101820 !important;
+}
+
+
+#qr-reader video {
+  width: 100% !important;
+
+  height: auto !important;
+
+  min-height: 300px;
+
+  object-fit: cover;
+}
+
+
+/*
+  Library चे unnecessary text/buttons hide.
+*/
+
+#qr-reader__dashboard {
+  display: none !important;
+}
+
+
+#qr-reader__header_message {
+  display: none !important;
+}
+
+
+/*
+  QR scanning box.
+*/
+
+#qr-reader__scan_region {
+  border: none !important;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.scan-actions {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+
+  margin-top: 20px;
+}
+
+
+.scan-action-btn {
+  min-height: 82px;
+
+  border: 1px solid #dceaff;
+
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  cursor: pointer;
+
+  color: #123b68;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+
+.scan-action-btn:hover {
+  border-color: #1677ff;
+
+  background: #f7fbff;
+}
+
+
+.scan-action-btn.active {
+  background: #eaf4ff;
+
+  border-color: #1677ff;
+
+  color: #1677ff;
+}
+
+
+.scan-action-icon {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background: #eef6ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+}
+
+
+.scan-action-btn input {
+  display: none;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.scan-error {
+  margin-top: 18px;
+
+  padding: 13px 15px;
+
+  border-radius: 14px;
+
+  background: #fff2f2;
+
+  border: 1px solid #ffd1d1;
+
+  color: #e53935;
+
+  font-size: 14px;
+
+  text-align: center;
+
+  line-height: 1.4;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .scan-page {
+    padding: 0;
+  }
+
+  .scan-container {
+    max-width: 100%;
+
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+  .scan-content {
+    padding: 25px 18px 30px;
+  }
+
+  .scan-header h1 {
+    font-size: 22px;
+  }
+
+  .scan-title h2 {
+    font-size: 21px;
+  }
+
+  .scan-title p {
+    font-size: 14px;
+  }
+
+  .scanner-box {
+    border-radius: 20px;
+  }
+
+  #qr-reader video {
+    min-height: 280px;
+  }
+
+}
+
+
+/* =========================
+   SMALL HEIGHT SCREENS
+========================= */
+
+@media (max-height: 700px) {
+
+  .scan-page {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+
+  .scan-header {
+    min-height: 78px;
+  }
+
+  .scan-content {
+    padding-top: 20px;
+  }
+
+  .scan-title {
+    margin-bottom: 18px;
+  }
+
+  #qr-reader video {
+    min-height: 240px;
+  }
+
+}

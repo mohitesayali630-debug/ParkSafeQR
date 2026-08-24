@@ -1,0 +1,520 @@
+/* =========================================
+   MY QR PAGE
+========================================= */
+
+.myqr-page {
+  min-height: 100vh;
+
+  background: #eaf3ff;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding: 20px 0;
+
+  box-sizing: border-box;
+
+  font-family:
+    "Poppins",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  color: #193b63;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.myqr-container {
+  width: 100%;
+
+  max-width: 400px;
+
+  min-height: calc(100vh - 40px);
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 35px
+    rgba(30, 91, 160, 0.15);
+
+  padding-bottom: 25px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.myqr-header {
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  box-sizing: border-box;
+}
+
+
+.myqr-header h1 {
+  margin: 0;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: #1769ff;
+
+  letter-spacing: 0.2px;
+}
+
+
+.myqr-back-btn {
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background: #eef5ff;
+
+  color: #1769ff;
+
+  font-size: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+
+.myqr-back-btn:hover {
+  background: #dcecff;
+}
+
+
+.myqr-header-space {
+  width: 42px;
+
+  height: 42px;
+}
+
+
+/* =========================================
+   QR CARD
+========================================= */
+
+.myqr-card {
+  margin: 5px 18px 22px;
+
+  padding: 25px 15px 22px;
+
+  border: 1px solid #e0e9f5;
+
+  border-radius: 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 5px 18px
+    rgba(31, 90, 150, 0.08);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   QR ICON
+========================================= */
+
+.myqr-icon-circle {
+  width: 48px;
+
+  height: 48px;
+
+  margin: 0 auto 12px;
+
+  border-radius: 50%;
+
+  background: #eaf3ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #1769ff;
+
+  font-size: 21px;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.myqr-card h2 {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #1769ff;
+
+  font-weight: 700;
+}
+
+
+.myqr-subtitle {
+  margin: 5px 0 18px;
+
+  color: #8191a8;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   QR CODE BOX
+========================================= */
+
+.myqr-code-box {
+  width: 260px;
+
+  height: 260px;
+
+  margin: 0 auto;
+
+  border: 1px solid #dce6f2;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+
+.myqr-code-box svg {
+  display: block;
+
+  width: 230px;
+
+  height: 230px;
+}
+
+
+/* =========================================
+   QR ACTIVE STATUS
+========================================= */
+
+.qr-active {
+  margin-top: 14px;
+
+  color: #159447;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+}
+
+
+.active-dot {
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #18b45c;
+
+  display: inline-block;
+}
+
+
+/* =========================================
+   QR SETTINGS
+========================================= */
+
+.myqr-section {
+  margin: 0 18px;
+
+  box-sizing: border-box;
+}
+
+
+.myqr-section h3 {
+  margin: 0 0 12px;
+
+  font-size: 18px;
+
+  color: #1769ff;
+
+  font-weight: 700;
+}
+
+
+/* =========================================
+   SETTINGS BUTTON
+========================================= */
+
+.myqr-setting-btn {
+  width: 100%;
+
+  min-height: 62px;
+
+  border: 1px solid #e0e9f5;
+
+  background: #ffffff;
+
+  border-radius: 15px;
+
+  margin-bottom: 10px;
+
+  padding: 0 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  color: #193b63;
+
+  font-family: inherit;
+
+  transition: 0.2s ease;
+
+  box-sizing: border-box;
+}
+
+
+.myqr-setting-btn:hover {
+  background: #f6faff;
+
+  border-color: #bcd6ff;
+
+  transform: translateY(-1px);
+}
+
+
+.myqr-setting-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   SETTING LEFT
+========================================= */
+
+.setting-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   SETTING ICON
+========================================= */
+
+.setting-icon {
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 11px;
+
+  background: #eaf3ff;
+
+  color: #1769ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.setting-arrow {
+  color: #1769ff;
+
+  font-size: 20px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .myqr-page {
+    padding: 0;
+
+    min-height: 100vh;
+  }
+
+
+  .myqr-container {
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    padding-bottom: 25px;
+  }
+
+
+  .myqr-code-box {
+    width: 245px;
+
+    height: 245px;
+  }
+
+
+  .myqr-code-box svg {
+    width: 220px;
+
+    height: 220px;
+  }
+
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print {
+
+  .myqr-page {
+    background: #ffffff;
+
+    padding: 0;
+
+    min-height: auto;
+  }
+
+
+  .myqr-container {
+    max-width: 100%;
+
+    min-height: auto;
+
+    box-shadow: none;
+
+    border-radius: 0;
+
+    padding: 0;
+  }
+
+
+  .myqr-header,
+  .myqr-section {
+    display: none;
+  }
+
+
+  .myqr-card {
+    border: none;
+
+    box-shadow: none;
+
+    margin: 50px auto 0;
+
+    padding: 0;
+  }
+
+
+  .myqr-icon-circle,
+  .myqr-subtitle,
+  .qr-active {
+    display: none;
+  }
+
+
+  .myqr-card h2 {
+    color: #000000;
+
+    margin-bottom: 25px;
+  }
+
+
+  .myqr-code-box {
+    border: none;
+
+    width: 320px;
+
+    height: 320px;
+  }
+
+
+  .myqr-code-box svg {
+    width: 300px;
+
+    height: 300px;
+  }
+
+}
