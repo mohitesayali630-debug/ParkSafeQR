@@ -48,4 +48,4 @@ databases:
   - name: parksafe-db
     plan: free
     databaseName: parksafe_db
-    user: postgres
+    
