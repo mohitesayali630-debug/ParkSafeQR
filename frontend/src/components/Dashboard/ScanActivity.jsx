@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../config";
 import { formatScanTime } from "../../utils/dateUtils";
 import "../../css/Dashboard/ScanActivity.css";
 
-const History = () => {
+const ScanActivity = () => {
   const navigate = useNavigate();
 
   const storedUser = JSON.parse(
@@ -21,11 +21,11 @@ const History = () => {
     storedUser?.vehicleNumber ||
     "";
 
-  const [scans, setScans] = useState([]);
+  const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchHistory = async () => {
+    const fetchScanHistory = async () => {
       if (!userId) {
         setLoading(false);
         return;
@@ -38,20 +38,20 @@ const History = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setScans(Array.isArray(data) ? data : []);
+          setActivities(Array.isArray(data) ? data : []);
         } else {
           console.error("Failed to load scan history");
-          setScans([]);
+          setActivities([]);
         }
       } catch (error) {
         console.error("Error fetching scan history:", error);
-        setScans([]);
+        setActivities([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchHistory();
+    fetchScanHistory();
   }, [userId]);
 
   return (
@@ -67,41 +67,41 @@ const History = () => {
             ←
           </button>
 
-          <h1>Scan History</h1>
+          <h1>Scan Activity</h1>
 
           <div className="header-space"></div>
         </div>
 
         {/* TITLE */}
         <div className="activity-title">
-          <h2>All Scans</h2>
-          <p>Complete record of all QR scans for your vehicle</p>
+          <h2>Recent Scans</h2>
+          <p>Your recent QR scan activity</p>
         </div>
 
-        {/* SCAN LIST */}
+        {/* ACTIVITY LIST */}
         {loading ? (
           <div style={{ textAlign: "center", padding: "40px 20px", color: "#777" }}>
-            <p style={{ margin: 0, color: "#1677ff", fontSize: "14px" }}>Loading scan history...</p>
+            <p style={{ margin: 0, color: "#1677ff", fontSize: "14px" }}>Loading scan activity...</p>
           </div>
-        ) : scans.length === 0 ? (
+        ) : activities.length === 0 ? (
           <div style={{ textAlign: "center", padding: "60px 20px", color: "#777" }}>
             <div style={{ fontSize: "40px", marginBottom: "12px" }}>📍</div>
-            <h3 style={{ margin: "0 0 6px", color: "#333", fontSize: "18px" }}>No Scan History</h3>
+            <h3 style={{ margin: "0 0 6px", color: "#333", fontSize: "18px" }}>No Scan Activity</h3>
             <p style={{ margin: 0, color: "#888", fontSize: "14px" }}>
-              Your QR scan history will appear here once someone scans your vehicle QR code.
+              No scans have been recorded for your vehicle QR code yet.
             </p>
           </div>
         ) : (
           <div className="activity-list">
-            {scans.map((scan) => (
-              <div className="activity-card" key={scan.id}>
+            {activities.map((activity) => (
+              <div className="activity-card" key={activity.id}>
 
                 <div className="activity-icon">
                   📍
                 </div>
 
                 <div className="activity-info">
-                  <h3>{scan.activity_type || "QR Scanned"}</h3>
+                  <h3>{activity.activity_type || "QR Scanned"}</h3>
 
                   {vehicleNumber && (
                     <p>
@@ -112,11 +112,11 @@ const History = () => {
 
                   <p>
                     <strong>Location:</strong>{" "}
-                    {scan.location || "Scan Location"}
+                    {activity.location || "Scan Location"}
                   </p>
 
                   <span className="activity-time">
-                    {formatScanTime(scan.scanned_at)}
+                    {formatScanTime(activity.scanned_at)}
                   </span>
                 </div>
 
@@ -135,4 +135,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default ScanActivity;

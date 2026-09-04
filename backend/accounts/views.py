@@ -1,5 +1,7 @@
 from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 
@@ -24,6 +26,7 @@ from django.contrib.auth.hashers import make_password
 from .serializers import UserSerializer
 
 import random
+from datetime import timedelta
 from django.utils import timezone
 
 
@@ -565,6 +568,8 @@ def dashboard_stats(request, user_id):
             else "Protected"
         ),
 
+        "registered_on": user.created_at.strftime("%d %b %Y"),
+
         "recent_scans": recent_scans,
     })
 
@@ -646,6 +651,22 @@ def log_scan(request):
         return Response({
             "error": "User not found."
         }, status=404)
+
+    # ========================================================
+    # CHECK FOR RAPID DUPLICATE SCAN (Within 5 seconds)
+    # ========================================================
+
+    recent_scan = ScanActivity.objects.filter(
+        user=user,
+        activity_type=activity_type,
+        scanned_at__gte=timezone.now() - timedelta(seconds=5)
+    ).first()
+
+    if recent_scan:
+        return Response({
+            "message": "Scan already logged",
+            "id": recent_scan.id,
+        })
 
     # ========================================================
     # SAVE SCAN ACTIVITY
@@ -730,7 +751,52 @@ def user_profile(request, user_id):
     if request.method in ["PUT", "PATCH"]:
 
         if "fullName" in request.data:
-            user.full_name = request.data["fullName"]
+            user.full_name = str(request.data["fullName"]).strip()
+
+        if "email" in request.data:
+            email_val = request.data["email"]
+            if email_val:
+                email_val = str(email_val).strip()
+                try:
+                    validate_email(email_val)
+                except ValidationError:
+                    return Response({
+                        "error": "Invalid email address format."
+                    }, status=400)
+
+                if User.objects.filter(email__iexact=email_val).exclude(id=user.id).exists():
+                    return Response({
+                        "error": "Email is already registered with another account."
+                    }, status=400)
+                user.email = email_val
+            else:
+                user.email = None
+
+        mobile_val = None
+        if "mobile_number" in request.data:
+            mobile_val = request.data["mobile_number"]
+        elif "mobile" in request.data:
+            mobile_val = request.data["mobile"]
+
+        if mobile_val is not None:
+            mobile_val = str(mobile_val).strip()
+            if not mobile_val:
+                return Response({
+                    "error": "Mobile number cannot be empty."
+                }, status=400)
+
+            clean_mobile = "".join(filter(str.isdigit, mobile_val))
+            if len(clean_mobile) < 10 or len(mobile_val) > 15:
+                return Response({
+                    "error": "Please enter a valid mobile number (10-15 digits)."
+                }, status=400)
+
+            if User.objects.filter(mobile_number=mobile_val).exclude(id=user.id).exists():
+                return Response({
+                    "error": "Mobile number is already registered with another account."
+                }, status=400)
+
+            user.mobile_number = mobile_val
 
         if "bloodGroup" in request.data:
             user.blood_group = request.data["bloodGroup"]
@@ -745,6 +811,11 @@ def user_profile(request, user_id):
                 "privacy"
             ].lower()
 
+        if "vehicleNumber" in request.data:
+            user.vehicle_number = request.data[
+                "vehicleNumber"
+            ].strip().upper()
+
         user.save()
 
         return Response({
@@ -758,6 +829,8 @@ def user_profile(request, user_id):
             "email": user.email,
 
             "mobile": user.mobile_number,
+
+            "mobile_number": user.mobile_number,
 
             "vehicleNumber": user.vehicle_number,
 
@@ -1272,6 +1345,42 @@ def mark_all_notifications_read(
         "message": "All notifications marked as read.",
 
         "updated_count": updated_count
+    })
+
+
+# ============================================================
+# 🔔 DELETE NOTIFICATION
+# ============================================================
+
+@api_view(["DELETE"])
+def delete_notification(
+    request,
+    notification_id
+):
+
+    try:
+
+        notification = Notification.objects.get(
+            id=notification_id
+        )
+
+    except Notification.DoesNotExist:
+
+        return Response({
+            "error": "Notification not found."
+        }, status=404)
+
+    user_id = request.query_params.get("user_id") or request.data.get("user_id")
+    if user_id and str(notification.user_id) != str(user_id):
+        return Response({
+            "error": "Unauthorized to delete this notification."
+        }, status=403)
+
+    notification.delete()
+
+    return Response({
+        "message": "Notification deleted successfully.",
+        "id": notification_id
     })
 
 

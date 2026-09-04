@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Html5Qrcode } from "html5-qrcode";
+import { API_BASE_URL } from "../../config";
 import "../../css/Dashboard/ScanQR.css";
 
 const ScanQR = () => {
@@ -10,6 +11,7 @@ const ScanQR = () => {
   const mountedRef = useRef(true);
   const startingRef = useRef(false);
   const scanLoggedRef = useRef(false);
+  const isProcessingScanRef = useRef(false);
 
   const [error, setError] = useState("");
   const [scannedData, setScannedData] = useState("");
@@ -29,7 +31,7 @@ const ScanQR = () => {
 
     try {
       const response = await fetch(
-       "http://10.52.74.35:8000/api/log-scan/",
+       `${API_BASE_URL}/log-scan/`,
         {
           method: "POST",
           headers: {
@@ -118,10 +120,11 @@ const ScanQR = () => {
             url.origin ===
             window.location.origin
           ) {
-            navigate(url.pathname);
+            navigate(url.pathname, { state: { scanLogged: true } });
           } else {
             navigate(
-              `/vehicle/${ownerUserId}`
+              `/vehicle/${ownerUserId}`,
+              { state: { scanLogged: true } }
             );
           }
 
@@ -136,7 +139,7 @@ const ScanQR = () => {
           url.origin ===
           window.location.origin
         ) {
-          navigate(url.pathname);
+          navigate(url.pathname, { state: { scanLogged: true } });
         } else {
           window.location.href = decodedText;
         }
@@ -182,7 +185,8 @@ const ScanQR = () => {
        */
 
       navigate(
-        `/vehicle/${ownerUserId}`
+        `/vehicle/${ownerUserId}`,
+        { state: { scanLogged: true } }
       );
 
       return;
@@ -227,7 +231,8 @@ const ScanQR = () => {
          */
 
         navigate(
-          `/vehicle/${ownerUserId}`
+          `/vehicle/${ownerUserId}`,
+          { state: { scanLogged: true } }
         );
 
         return;
@@ -288,10 +293,13 @@ const ScanQR = () => {
 
             async (decodedText) => {
               if (
-                !mountedRef.current
+                !mountedRef.current ||
+                isProcessingScanRef.current
               ) {
                 return;
               }
+
+              isProcessingScanRef.current = true;
 
               /*
                * Stop scanner after successful scan
@@ -442,7 +450,8 @@ const ScanQR = () => {
       const file =
         event.target.files?.[0];
 
-      if (!file) return;
+      if (!file || isProcessingScanRef.current) return;
+      isProcessingScanRef.current = true;
 
       try {
         const galleryScanner =

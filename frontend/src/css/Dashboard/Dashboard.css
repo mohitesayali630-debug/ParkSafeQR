@@ -249,20 +249,7 @@ body {
 
     margin-bottom: 12px;
 
-    transition: 0.3s;
-}
-
-
-.scan-card:hover {
-    border-color: #0d6efd;
-
-    box-shadow:
-        0 5px 15px rgba(
-            13,
-            110,
-            253,
-            0.12
-        );
+    cursor: default;
 }
 
 

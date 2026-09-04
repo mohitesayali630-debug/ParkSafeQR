@@ -34,6 +34,7 @@ from .views import (
     create_notification,
     mark_notification_read,
     mark_all_notifications_read,
+    delete_notification,
 
     about_us,
 )
@@ -215,6 +216,18 @@ path(
         "notifications/<int:user_id>/mark-all-read/",
         mark_all_notifications_read,
         name="mark_all_notifications_read"
+    ),
+
+    path(
+        "notification/<int:notification_id>/delete/",
+        delete_notification,
+        name="delete_notification"
+    ),
+
+    path(
+        "notification/<int:notification_id>/",
+        delete_notification,
+        name="delete_notification_direct"
     ),
 
 

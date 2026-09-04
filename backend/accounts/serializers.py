@@ -72,4 +72,3 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "created_at",
             "contacts",
         ]
-        read_only_fields = ["mobile_number"]

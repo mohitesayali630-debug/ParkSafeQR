@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 import logo from "../assets/images/logo.png";
 import "../css/PublicVehicle.css";
 
 function PublicVehicle() {
     const { userId } = useParams();
+    const location = useLocation();
+    const scanLoggedRef = useRef(false);
     const [showEmergency, setShowEmergency] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -27,7 +30,7 @@ function PublicVehicle() {
 
         const fetchVehicle = async () => {
             try {
-                const response = await fetch(`http://10.52.74.35:8000/api/vehicle/${userId}/`)
+                const response = await fetch(`${API_BASE_URL}/vehicle/${userId}/`)
                 if (!response.ok) {
                     throw new Error("Vehicle not found.");
                 }
@@ -46,16 +49,19 @@ function PublicVehicle() {
                     })),
                 });
 
-                // Background log scan
-                fetch("http://10.202.232.35:8000/api/log-scan/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        location: "QR Code Scan",
-                        activity_type: "QR Scanned",
-                    }),
-                }).catch(() => {});
+                // Background log scan if not already logged by in-app scanner
+                if (!location.state?.scanLogged && !scanLoggedRef.current) {
+                    scanLoggedRef.current = true;
+                    fetch(`${API_BASE_URL}/log-scan/`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            user_id: userId,
+                            location: "QR Code Scan",
+                            activity_type: "QR Scanned",
+                        }),
+                    }).catch(() => {});
+                }
             } catch (err) {
                 setError(err.message || "Failed to load vehicle details.");
             } finally {
@@ -64,7 +70,7 @@ function PublicVehicle() {
         };
 
         fetchVehicle();
-    }, [userId]);
+    }, [userId, location.state?.scanLogged]);
 
     const whatsappMessage =
         "Hello, I scanned your ParkSafe QR. I need to contact you regarding your vehicle.";

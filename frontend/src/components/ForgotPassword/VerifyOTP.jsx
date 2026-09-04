@@ -9,6 +9,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 import "../../css/VerifyOTP.css";
 import logo from "../../assets/images/logo.png";
@@ -85,7 +86,7 @@ const verifyOTP = async (code) => {
   try {
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/verify-otp/",
+      `${API_BASE_URL}/verify-otp/`,
       {
         method: "POST",
 
@@ -243,7 +244,7 @@ const verifyOTP = async (code) => {
   try {
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/resend-otp/",
+      `${API_BASE_URL}/resend-otp/`,
       {
         method: "POST",
         headers: {

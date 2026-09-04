@@ -4,7 +4,7 @@ const BASE_URL = "https://bargiee.microdynamicsoftware.uk/api/otp";
 
 export const sendOTP = async (mobile) => {
 
-    const response = await axios.post(
+    const response = await axios.post( 
         `${BASE_URL}/send`,
         {
             mobile,

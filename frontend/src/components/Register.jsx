@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { sendOTP } from "../services/otpService";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 import "../css/Register.css";
 
 import logo from "../assets/images/logo.png";
@@ -319,7 +320,7 @@ function Register() {
         try {
 
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/register/",
+                `${API_BASE_URL}/register/`,
                 {
                     ...formData,
 

@@ -1,27 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LoginForm from "./components/LoginForm";
 import Register from "./components/Register";
-
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import VerifyOTP from "./components/ForgotPassword/VerifyOTP";
 import ResetPassword from "./components/ForgotPassword/ResetPassword";
 import PasswordResetSuccess from "./components/ForgotPassword/PasswordResetSuccess";
-
 import OTPVerification from "./components/Register/OTPVerification";
 import GenerateQR from "./components/Register/GenerateQR";
-
 import Dashboard from "./components/Dashboard/Dashboard";
 import Profile from "./components/Dashboard/Profile";
 import EmergencyContacts from "./components/Dashboard/EmergencyContacts";
 import Vehicle from "./components/Dashboard/Vehicle";
 import MyQR from "./components/Dashboard/MyQR";
 import ScanQR from "./components/Dashboard/ScanQR";
-import History from "./components/Dashboard/History";
 import Settings from "./components/Dashboard/Settings";
 import AboutUs from "./components/Dashboard/AboutUs";
 import Notifications from "./components/Dashboard/Notifications";
 import PublicVehicle from "./components/PublicVehicle";
+import ScanActivity from "./components/Dashboard/ScanActivity";
 
 // ============================================================
 // APP
@@ -132,11 +129,18 @@ function App() {
           element={<ScanQR />}
         />
 
-        {/* HISTORY */}
+        {/* HISTORY REDIRECT */}
 
         <Route
           path="/history"
-          element={<History />}
+          element={<Navigate to="/scan-activity" replace />}
+        />
+
+        {/* SCAN ACTIVITY */}
+
+        <Route
+          path="/scan-activity"
+          element={<ScanActivity />}
         />
 
         {/* SETTINGS */}
@@ -158,11 +162,6 @@ function App() {
         <Route
           path="/about-us"
           element={<AboutUs />}
-        />
-
-        <Route
-          path="/notifications"
-          element={<Notifications />}
         />
 
       </Routes>

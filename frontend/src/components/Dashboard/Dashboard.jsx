@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
+import { formatScanTime } from "../../utils/dateUtils";
 import "../../css/Dashboard/Dashboard.css";
 import logo from "../../assets/images/logo.png";
 
@@ -38,7 +40,6 @@ function Dashboard() {
     vehicleStatus: "Active",
     qrStatus: "Generated",
     contactsCount: 0,
-    privacy: "Protected",
     recentScans: [],
   });
 
@@ -46,7 +47,7 @@ function Dashboard() {
     const fetchStats = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/dashboard-stats/${userId}/`
+          `${API_BASE_URL}/dashboard-stats/${userId}/`
         );
 
         if (response.ok) {
@@ -70,10 +71,6 @@ function Dashboard() {
               data.contacts_count !== undefined
                 ? data.contacts_count
                 : 0,
-
-            privacy:
-              data.privacy ||
-              "Protected",
 
             recentScans:
               data.recent_scans ||
@@ -160,7 +157,7 @@ function Dashboard() {
           <button
             className="header-btn"
             onClick={() =>
-              navigate("/history")
+              navigate("/notifications")
             }
             aria-label="Notifications"
           >
@@ -333,29 +330,19 @@ function Dashboard() {
               Recent Scan Activity
             </h3>
 
-            <button
-              className="view-btn"
-              onClick={() =>
-                navigate("/history")
-              }
-            >
-              View All
-            </button>
+                    <button
+                      onClick={() => navigate("/scan-activity")}
+                      className="view-btn"
+                    >
+                      View All
+                    </button>
 
           </div>
 
 
           {stats.recentScans.length === 0 ? (
 
-            <div
-              className="scan-card"
-              onClick={() =>
-                navigate("/history")
-              }
-              style={{
-                cursor: "pointer",
-              }}
-            >
+            <div className="scan-card">
 
               <div className="scan-left">
 
@@ -383,8 +370,6 @@ function Dashboard() {
                   Active
                 </span>
 
-                <FaChevronRight />
-
               </div>
 
             </div>
@@ -397,12 +382,6 @@ function Dashboard() {
                 <div
                   className="scan-card"
                   key={idx}
-                  onClick={() =>
-                    navigate("/history")
-                  }
-                  style={{
-                    cursor: "pointer",
-                  }}
                 >
 
                   <div className="scan-left">
@@ -423,29 +402,27 @@ function Dashboard() {
 
                     <div>
 
-                      <h4>
-                        {scan.activity_type}
-                      </h4>
+                  <h4>
+                    {scan.activity_type}
+                  </h4>
 
-                      <p>
-                        {scan.location}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  <div className="scan-right">
-
-                    <span>
-                      {scan.scanned_at}
-                    </span>
-
-                    <FaChevronRight />
-
-                  </div>
+                  <p>
+                    {scan.location}
+                  </p>
 
                 </div>
+
+              </div>
+
+              <div className="scan-right">
+
+                <span>
+                  {formatScanTime(scan.scanned_at)}
+                </span>
+
+              </div>
+
+            </div>
 
               )
             )
@@ -500,19 +477,6 @@ function Dashboard() {
 
               <span>
                 {stats.contactsCount} Added
-              </span>
-
-            </div>
-
-
-            <div className="status-item">
-
-              <span>
-                Privacy
-              </span>
-
-              <span className="status-active">
-                {stats.privacy}
               </span>
 
             </div>
@@ -586,7 +550,9 @@ function Dashboard() {
           <div
             className="nav-item"
             onClick={() =>
-              navigate("/profile")
+              navigate("/profile", {
+                state: { from: "/dashboard" },
+              })
             }
           >
 

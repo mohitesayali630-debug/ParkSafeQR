@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 import "../../css/ForgotPassword.css";
 import logo from "../../assets/images/logo.png";
@@ -45,7 +46,7 @@ const handleSendOTP = async () => {
   try {
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/send-otp/",
+      `${API_BASE_URL}/send-otp/`,
       {
         method: "POST",
         headers: {

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import QRCode from "react-qr-code";
+import { getPublicVehicleUrl } from "../../config";
 
 import "../../css/GenerateQR.css";
 import logo from "../../assets/images/logo.png";
@@ -20,13 +21,13 @@ function GenerateQR() {
   const {
     userId = storedUser.user_id || storedUser.id || 1,
     ownerName = storedUser.full_name || "Owner",
-    vehicleNumber = storedUser.vehicle_number || "MH12AB1234",
+    vehicleNumber = storedUser.vehicle_number || "",
     mobile = storedUser.mobile_number || "",
   } = location.state || {};
 
   const uniqueId = `PSQR-${String(userId).padStart(4, "0")}`;
 
-const qrData = `http://10.52.74.35:3000/vehicle/${userId}`;
+  const qrData = getPublicVehicleUrl(userId);
 
   const downloadQR = () => {
     const svg = document.getElementById("parksafeQR");

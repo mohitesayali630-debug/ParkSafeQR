@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../css/Login.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 import logo from "../assets/images/logo.png";
 import car from "../assets/images/car.png";
@@ -28,7 +29,7 @@ function LoginForm() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/api/login/",
+            `${API_BASE_URL}/login/`,
             {
                 method: "POST",
 

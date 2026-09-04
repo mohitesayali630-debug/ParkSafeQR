@@ -1,15 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 function Settings() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
-  // ============================================================
-  // BACKEND URL
-  // ============================================================
-
-  const API_BASE_URL = "http://127.0.0.1:8000/api";
 
   // ============================================================
   // SAFE JSON PARSER
@@ -555,7 +552,9 @@ function Settings() {
   // ============================================================
 
   const handleProfile = () => {
-    window.location.href = "/profile";
+    navigate("/profile", {
+      state: { from: "/settings" },
+    });
   };
 
   // ============================================================
@@ -563,7 +562,7 @@ function Settings() {
   // ============================================================
 
   const handleBack = () => {
-    window.location.href = "/dashboard";
+    navigate("/dashboard");
   };
 
   // ============================================================

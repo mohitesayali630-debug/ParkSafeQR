@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 import "../../css/Dashboard/Profile.css";
 
@@ -11,12 +12,13 @@ import {
   FaPhoneAlt,
   FaTint,
   FaHeartbeat,
-  FaLock,
   FaUsers,
 } from "react-icons/fa";
 
 function Profile() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = location.state?.from || "/dashboard";
 
   // =====================================================
   // EDIT MODE
@@ -67,8 +69,6 @@ function Profile() {
     bloodGroup: "B+",
 
     medicalInfo: "None",
-
-    privacy: "Private",
   };
 
   // =====================================================
@@ -179,7 +179,7 @@ function Profile() {
 
       try {
         const profRes = await fetch(
-          `http://127.0.0.1:8000/api/profile/${userId}/`
+          `${API_BASE_URL}/profile/${userId}/`
         );
 
         if (profRes.ok) {
@@ -193,8 +193,9 @@ function Profile() {
               defaultProfileData.fullName,
 
             email:
-              prof.email ||
-              defaultProfileData.email,
+              prof.email !== undefined && prof.email !== null
+                ? prof.email
+                : defaultProfileData.email,
 
             mobile:
               prof.mobile ||
@@ -211,10 +212,6 @@ function Profile() {
               prof.medicalInfo ||
               prof.medical_info ||
               "None",
-
-            privacy:
-              prof.privacy ||
-              "Private",
           });
         }
       } catch (e) {
@@ -230,7 +227,7 @@ function Profile() {
 
       try {
         const contRes = await fetch(
-          `http://127.0.0.1:8000/api/contacts/${userId}/`
+          `${API_BASE_URL}/contacts/${userId}/`
         );
 
         if (contRes.ok) {
@@ -246,47 +243,15 @@ function Profile() {
           );
 
           setEmergencyContacts(contacts);
-
-          sessionStorage.setItem(
-            "parksafe_emergency_contacts_saved",
-            JSON.stringify(contacts)
-          );
         } else {
-          throw new Error(
-            "Unable to load emergency contacts"
-          );
+          setEmergencyContacts([]);
         }
       } catch (e) {
         console.log(
           "Error loading contacts from backend:",
           e
         );
-
-        // ---------------------------------------------
-        // FALLBACK TO SESSION STORAGE
-        // ---------------------------------------------
-
-        try {
-          const savedContacts =
-            sessionStorage.getItem(
-              "parksafe_emergency_contacts_saved"
-            );
-
-          if (savedContacts) {
-            const parsedContacts =
-              JSON.parse(savedContacts);
-
-            const contacts =
-              normalizeContacts(parsedContacts);
-
-            setEmergencyContacts(contacts);
-          }
-        } catch (storageError) {
-          console.log(
-            "Unable to load saved contacts:",
-            storageError
-          );
-        }
+        setEmergencyContacts([]);
       } finally {
         setContactsLoading(false);
       }
@@ -322,14 +287,16 @@ function Profile() {
   // =====================================================
 
   const handleManageContacts = () => {
-    navigate("/emergency-contacts");
+    navigate("/emergency-contacts", {
+      state: { from: returnTo },
+    });
   };
 
   // =====================================================
   // EDIT / SAVE
   // =====================================================
 
-  const handleButton = () => {
+  const handleButton = async () => {
     // -----------------------------------------------
     // ENTER EDIT MODE
     // -----------------------------------------------
@@ -346,7 +313,7 @@ function Profile() {
     }
 
     // -----------------------------------------------
-    // FINAL SAVE
+    // FINAL SAVE — send to backend
     // -----------------------------------------------
 
     let finalProfileData = profileData;
@@ -368,66 +335,81 @@ function Profile() {
       );
     }
 
-    console.log(
-      "Final Profile Data:",
-      finalProfileData
-    );
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/profile/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: finalProfileData.fullName,
+            email: finalProfileData.email,
+            mobile_number: finalProfileData.mobile,
+            bloodGroup: finalProfileData.bloodGroup,
+            medicalInfo: finalProfileData.medicalInfo,
+          }),
+        }
+      );
 
-    console.log(
-      "Final Emergency Contacts:",
-      emergencyContacts
-    );
+      const data = await response.json().catch(() => ({}));
 
-    // -----------------------------------------------
-    // SAVE PROFILE
-    // -----------------------------------------------
+      if (response.ok) {
+        // Update local state with backend-confirmed values
+        setProfileData({
+          fullName: data.fullName || finalProfileData.fullName,
+          email:
+            data.email !== undefined && data.email !== null
+              ? data.email
+              : finalProfileData.email,
+          mobile:
+            data.mobile ||
+            data.mobile_number ||
+            finalProfileData.mobile,
+          bloodGroup: data.bloodGroup || finalProfileData.bloodGroup,
+          medicalInfo: data.medicalInfo || finalProfileData.medicalInfo,
+        });
 
-    sessionStorage.setItem(
-      "parksafe_profile_saved",
-      JSON.stringify(finalProfileData)
-    );
+        // Sync localStorage cache
+        const updatedUser = {
+          ...storedUser,
+          full_name: data.fullName || finalProfileData.fullName,
+          email:
+            data.email !== undefined && data.email !== null
+              ? data.email
+              : finalProfileData.email,
+          mobile_number:
+            data.mobile_number ||
+            data.mobile ||
+            finalProfileData.mobile,
+        };
 
-    // -----------------------------------------------
-    // SAVE CONTACTS
-    // -----------------------------------------------
+        localStorage.setItem(
+          "parksafe_user",
+          JSON.stringify(updatedUser)
+        );
 
-    sessionStorage.setItem(
-      "parksafe_emergency_contacts_saved",
-      JSON.stringify(emergencyContacts)
-    );
+        // Clean up session drafts
+        sessionStorage.removeItem("parksafe_profile_draft");
+        sessionStorage.removeItem("parksafe_emergency_contacts_draft");
+        sessionStorage.removeItem("parksafe_profile_edit_mode");
 
-    // -----------------------------------------------
-    // REMOVE DRAFTS
-    // -----------------------------------------------
+        setEditMode(false);
 
-    sessionStorage.removeItem(
-      "parksafe_profile_draft"
-    );
+        alert(data.message || "Profile Updated Successfully!");
 
-    sessionStorage.removeItem(
-      "parksafe_emergency_contacts_draft"
-    );
-
-    // -----------------------------------------------
-    // RESET EDIT MODE
-    // -----------------------------------------------
-
-    sessionStorage.removeItem(
-      "parksafe_profile_edit_mode"
-    );
-
-    setEditMode(false);
-
-    alert(
-      "Profile Updated Successfully!"
-    );
-
-    // -----------------------------------------------
-    // IMPORTANT:
-    // SAVE NANTAR SETTINGS PAGE
-    // -----------------------------------------------
-
-    navigate("/settings");
+        navigate(returnTo);
+      } else {
+        alert(
+          data.error ||
+          "Failed to update profile. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("Profile update error:", error);
+      alert("Server error: Unable to update profile.");
+    }
   };
 
   // =====================================================
@@ -460,11 +442,10 @@ function Profile() {
     }
 
     // =================================================
-    // IMPORTANT CHANGE
-    // PROFILE -> SETTINGS
+    // RETURN TO PREVIOUS PAGE (DASHBOARD OR SETTINGS)
     // =================================================
 
-    navigate("/settings");
+    navigate(returnTo);
   };
 
   // =====================================================
@@ -546,8 +527,10 @@ function Profile() {
 
             <input
               type="email"
+              name="email"
               value={profileData.email}
-              disabled
+              onChange={handleChange}
+              disabled={!editMode}
             />
 
           </div>
@@ -563,8 +546,10 @@ function Profile() {
 
             <input
               type="text"
+              name="mobile"
               value={profileData.mobile}
-              disabled
+              onChange={handleChange}
+              disabled={!editMode}
             />
 
           </div>
@@ -648,34 +633,6 @@ function Profile() {
 
               <option value="Other">
                 Other
-              </option>
-
-            </select>
-
-          </div>
-
-          {/* PRIVACY */}
-
-          <div className="info-group">
-
-            <label>
-              <FaLock className="info-icon" />
-              Privacy
-            </label>
-
-            <select
-              name="privacy"
-              value={profileData.privacy}
-              onChange={handleChange}
-              disabled={!editMode}
-            >
-
-              <option value="Private">
-                Private
-              </option>
-
-              <option value="Public">
-                Public
               </option>
 
             </select>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
 import { useNavigate, useLocation } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 
 import "../../css/ResetPassword.css";
 
@@ -173,7 +173,7 @@ useEffect(() => {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/api/reset-password/",
+            `${API_BASE_URL}/reset-password/`,
             {
                 method: "POST",
 

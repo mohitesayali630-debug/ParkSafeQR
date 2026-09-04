@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
 import "../../css/Dashboard/Vehicle.css";
 
 const Vehicle = () => {
@@ -17,51 +18,65 @@ const Vehicle = () => {
   const [vehicle, setVehicle] = useState({
     vehicleNumber: "",
     registeredOn: "",
+    vehicleStatus: "Active",
+    qrStatus: "Generated",
     loading: true,
   });
 
   const [showChangeForm, setShowChangeForm] = useState(false);
   const [newVehicleNumber, setNewVehicleNumber] = useState("");
+  const [saving, setSaving] = useState(false);
 
+  // ==========================
+  // Fetch vehicle data from backend
+  // ==========================
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/dashboard-stats/${userId}/`
+          `${API_BASE_URL}/dashboard-stats/${userId}/`
         );
 
         if (response.ok) {
           const data = await response.json();
 
-          console.log("Vehicle Data:", data);
-
           setVehicle({
             vehicleNumber:
               data.vehicle_number ||
               storedUser.vehicle_number ||
-              "MH12AB1234",
+              "",
 
             registeredOn:
               data.registered_on ||
-              "16 Aug 2026",
+              "",
+
+            vehicleStatus:
+              data.vehicle_status ||
+              "Active",
+
+            qrStatus:
+              data.qr_status ||
+              "Generated",
 
             loading: false,
           });
         } else {
           setVehicle({
-            vehicleNumber:
-              storedUser.vehicle_number || "MH12AB1234",
-            registeredOn: "16 Aug 2026",
+            vehicleNumber: storedUser.vehicle_number || "",
+            registeredOn: "",
+            vehicleStatus: "Active",
+            qrStatus: "Generated",
             loading: false,
           });
         }
       } catch (error) {
-        console.log("Error loading vehicle:", error);
+        console.error("Error loading vehicle:", error);
 
         setVehicle({
-          vehicleNumber:
-            storedUser.vehicle_number || "MH12AB1234",
-          registeredOn: "16 Aug 2026",
+          vehicleNumber: storedUser.vehicle_number || "",
+          registeredOn: "",
+          vehicleStatus: "Active",
+          qrStatus: "Generated",
           loading: false,
         });
       }
@@ -75,7 +90,10 @@ const Vehicle = () => {
     setShowChangeForm(true);
   };
 
-  const handleSaveVehicle = () => {
+  // ==========================
+  // Save vehicle number to DB via PUT /api/profile/
+  // ==========================
+  const handleSaveVehicle = async () => {
     if (!newVehicleNumber.trim()) {
       alert("Please enter vehicle number");
       return;
@@ -84,24 +102,63 @@ const Vehicle = () => {
     const updatedVehicleNumber =
       newVehicleNumber.trim().toUpperCase();
 
-    setVehicle((prev) => ({
-      ...prev,
-      vehicleNumber: updatedVehicleNumber,
-    }));
+    setSaving(true);
 
-    const updatedUser = {
-      ...storedUser,
-      vehicle_number: updatedVehicleNumber,
-    };
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/profile/${userId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            vehicleNumber: updatedVehicleNumber,
+          }),
+        }
+      );
 
-    localStorage.setItem(
-      "parksafe_user",
-      JSON.stringify(updatedUser)
-    );
+      const data = await response.json().catch(() => ({}));
 
-    setShowChangeForm(false);
+      if (response.ok) {
+        // Update displayed vehicle number
+        setVehicle((prev) => ({
+          ...prev,
+          vehicleNumber:
+            data.vehicleNumber ||
+            updatedVehicleNumber,
+        }));
 
-    alert("Vehicle number updated successfully!");
+        // Sync localStorage cache
+        const updatedUser = {
+          ...storedUser,
+          vehicle_number:
+            data.vehicleNumber ||
+            updatedVehicleNumber,
+        };
+
+        localStorage.setItem(
+          "parksafe_user",
+          JSON.stringify(updatedUser)
+        );
+
+        setShowChangeForm(false);
+        alert(
+          data.message ||
+          "Vehicle number updated successfully!"
+        );
+      } else {
+        alert(
+          data.error ||
+          "Failed to update vehicle number."
+        );
+      }
+    } catch (error) {
+      console.error("Error updating vehicle number:", error);
+      alert("Server error: Unable to update vehicle number.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -139,7 +196,7 @@ const Vehicle = () => {
           <h2>
             {vehicle.loading
               ? "Loading..."
-              : vehicle.vehicleNumber}
+              : vehicle.vehicleNumber || "Not Set"}
           </h2>
 
           <p>
@@ -167,7 +224,7 @@ const Vehicle = () => {
               <strong>
                 {vehicle.loading
                   ? "Loading..."
-                  : vehicle.vehicleNumber}
+                  : vehicle.vehicleNumber || "Not Set"}
               </strong>
 
             </div>
@@ -183,7 +240,7 @@ const Vehicle = () => {
               <strong>
                 {vehicle.loading
                   ? "Loading..."
-                  : vehicle.registeredOn}
+                  : vehicle.registeredOn || "—"}
               </strong>
 
             </div>
@@ -260,8 +317,9 @@ const Vehicle = () => {
                 <button
                   type="button"
                   onClick={handleSaveVehicle}
+                  disabled={saving}
                 >
-                  Save
+                  {saving ? "Saving..." : "Save"}
                 </button>
 
               </div>

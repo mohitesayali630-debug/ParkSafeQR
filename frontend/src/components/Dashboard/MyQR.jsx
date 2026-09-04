@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
+import { getPublicVehicleUrl } from "../../config";
 
 import "../../css/Dashboard/MyQR.css";
 
@@ -26,7 +27,7 @@ function MyQR() {
   const vehicleNumber =
     storedUser.vehicle_number ||
     storedUser.vehicleNumber ||
-    "MH12AB1234";
+    "";
 
   /*
     IMPORTANT:
@@ -37,7 +38,7 @@ function MyQR() {
     So My QR page is NOT generating a
     different/random QR code.
   */
-  const qrData = `http://10.52.74.35:3000/vehicle/${userId}`;
+  const qrData = getPublicVehicleUrl(userId);
 
   // ================= DOWNLOAD QR =================
 
