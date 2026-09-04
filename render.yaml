@@ -1,4 +1,4 @@
-﻿services:
+services:
   # ------------------------------------------------------------
   # DJANGO BACKEND WEB SERVICE
   # ------------------------------------------------------------
@@ -18,7 +18,7 @@
           name: parksafe-db
           property: connectionString
       - key: DJANGO_ALLOWED_HOSTS
-        value: "parksafe-backend.onrender.com"
+        value: "parksafe-backend-4ovr.onrender.com"
       - key: CORS_ALLOWED_ORIGINS
         value: "https://parksafe-frontend.onrender.com"
 
@@ -28,7 +28,7 @@
   - type: web
     name: parksafe-frontend
     runtime: static
-   
+    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/build
     routes:
@@ -37,7 +37,7 @@
         destination: /index.html
     envVars:
       - key: REACT_APP_API_BASE_URL
-        value: "https://parksafe-backend.onrender.com/api"
+        value: "https://parksafe-backend-4ovr.onrender.com/api"
       - key: REACT_APP_FRONTEND_URL
         value: "https://parksafe-frontend.onrender.com"
 
