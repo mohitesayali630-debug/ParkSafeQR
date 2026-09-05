@@ -1,8 +1,12 @@
 from django.urls import path
 from . import views
+
 from .views import (
 
     RegisterUserView,
+
+    proxy_send_otp,
+    proxy_verify_otp,
 
     send_test_email,
     send_otp,
@@ -50,6 +54,18 @@ urlpatterns = [
         "register/",
         RegisterUserView.as_view(),
         name="register"
+    ),
+
+        path(
+        "otp/send/",
+        proxy_send_otp,
+        name="proxy_send_otp"
+    ),
+
+    path(
+        "otp/verify/",
+        proxy_verify_otp,
+        name="proxy_verify_otp"
     ),
 
     path(

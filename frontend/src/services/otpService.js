@@ -1,11 +1,11 @@
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 
-const BASE_URL = "https://bargiee.microdynamicsoftware.uk/api/otp";
+const BASE_URL = `${API_BASE_URL}/otp`;
 
 export const sendOTP = async (mobile) => {
-
-    const response = await axios.post( 
-        `${BASE_URL}/send`,
+    const response = await axios.post(
+        `${BASE_URL}/send/`,
         {
             mobile,
             source: "web"
@@ -16,9 +16,8 @@ export const sendOTP = async (mobile) => {
 };
 
 export const verifyOTP = async (mobile, otp) => {
-
     const response = await axios.post(
-        `${BASE_URL}/verify`,
+        `${BASE_URL}/verify/`,
         {
             mobile,
             otp,

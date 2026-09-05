@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
-
+from django.views.decorators.csrf import csrf_exempt
 from .models import (
     User,
     OTP,
@@ -28,6 +28,8 @@ from .serializers import UserSerializer
 import random
 from datetime import timedelta
 from django.utils import timezone
+import json
+import requests
 
 
 # ============================================================
@@ -1671,3 +1673,81 @@ def download_my_data_pdf(request, user_id):
     pdf.save()
 
     return response
+
+@csrf_exempt
+def proxy_send_otp(request):
+    if request.method != "POST":
+        return JsonResponse(
+            {"error": "POST method required"},
+            status=405
+        )
+
+    try:
+        data = json.loads(request.body)
+
+        response = requests.post(
+            "https://bargiee.microdynamicsoftware.uk/api/otp/send",
+            json={
+                "mobile": data.get("mobile"),
+                "source": "web"
+            },
+            timeout=30
+        )
+
+        return JsonResponse(
+            response.json(),
+            status=response.status_code,
+            safe=False
+        )
+
+    except requests.RequestException as e:
+        return JsonResponse(
+            {"error": f"OTP service error: {str(e)}"},
+            status=502
+        )
+
+    except Exception as e:
+        return JsonResponse(
+            {"error": str(e)},
+            status=500
+        )
+
+
+@csrf_exempt
+def proxy_verify_otp(request):
+    if request.method != "POST":
+        return JsonResponse(
+            {"error": "POST method required"},
+            status=405
+        )
+
+    try:
+        data = json.loads(request.body)
+
+        response = requests.post(
+            "https://bargiee.microdynamicsoftware.uk/api/otp/verify",
+            json={
+                "mobile": data.get("mobile"),
+                "otp": data.get("otp"),
+                "source": "web"
+            },
+            timeout=30
+        )
+
+        return JsonResponse(
+            response.json(),
+            status=response.status_code,
+            safe=False
+        )
+
+    except requests.RequestException as e:
+        return JsonResponse(
+            {"error": f"OTP service error: {str(e)}"},
+            status=502
+        )
+
+    except Exception as e:
+        return JsonResponse(
+            {"error": str(e)},
+            status=500
+        )
